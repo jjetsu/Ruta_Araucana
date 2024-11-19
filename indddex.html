@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ruta Araucana</title>
+    
+    <!-- Estilos CSS -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: #1e3a3a; /* Verde oscuro */
+            color: white;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 4px solid #ff4081;
+        }
+
+        header .titulo {
+            font-size: 3rem;
+            font-weight: bold;
+        }
+
+        header .logo {
+            width: 80px;
+            height: auto;
+        }
+
+        header .version {
+            font-size: 1.1rem;
+            color: #ff4081;
+        }
+
+        nav {
+            background-color: #263238; /* Celeste oscuro */
+            padding: 10px;
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin: 0 20px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: #ff4081;
+            transform: scale(1.1);
+        }
+
+        .section {
+            display: none;
+            padding: 40px 20px;
+            margin: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        h3 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #263238;
+        }
+
+        .imagen-titulo {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .clima-container {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .clima-ciudad {
+            background-color: #e0f7fa;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            margin: 10px;
+            width: 200px;
+        }
+
+        .clima-ciudad h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .clima-ciudad p {
+            font-size: 1.1rem;
+        }
+
+        footer {
+            background-color: #263238; 
+            color: white;
+            text-align: center;
+            padding: 20px;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+
+        .news-section {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+
+        .news-item {
+            width: 30%;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .news-item h4 {
+            font-size: 1.5rem;
+            color: #333;
+        }
+
+        .news-item p {
+            color: #555;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+        }
+
+        .news-item a {
+            color: #ff4081;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        /* Formulario de contacto */
+        form input, form textarea, form button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 1rem;
+        }
+
+        form button {
+            background-color: #1e3a3a;
+            color: white;
+            cursor: pointer;
+        }
+
+        form button:hover {
+            background-color: #ff4081;
+        }
+
+        .mensaje-exito {
+            text-align: center;
+            color: green;
+            font-size: 1.2rem;
+            display: none;
+        }
+
+        /* Sección de reseñas */
+        .reseñas-container {
+            margin-top: 20px;
+        }
+
+        .reseña {
+            background-color: #f1f1f1;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+        }
+
+        .reseña h3 {
+            color: #1e3a3a;
+        }
+
+        .reseña p {
+            font-size: 1rem;
+        }
+
+        .form-reseña input, .form-reseña textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 1rem;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .form-reseña button {
+            width: 100%;
+            background-color: #1e3a3a;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            font-size: 1rem;
+        }
+
+        .form-reseña button:hover {
+            background-color: #ff4081;
+        }
+
+        /* Elige tu Aventura */
+        .form-aventura select, .form-aventura input, .form-aventura button {
+            margin: 10px 0;
+            padding: 10px;
+            width: 100%;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .form-aventura button {
+            background-color: #1e3a3a;
+            color: white;
+            cursor: pointer;
+        }
+
+        .form-aventura button:hover {
+            background-color: #ff4081;
+        }
+
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div>
+            <span class="version">Versión PreAlpha</span>
+        </div>
+        <h1 class="titulo">Ruta Araucana</h1>
+        <img class="logo" src="https://media.discordapp.net/attachments/802780385561673728/1308261058208862328/Diseno_sin_titulo.png?ex=673d4c8e&is=673bfb0e&hm=690025e15238136886ac10f656956da95afa4a4a545e4b93efd3db8b708e1bd5&=&format=webp&quality=lossless&width=671&height=671" alt="Logo Ruta Araucana">
+    </header>
+ </div>
+            <div class="news-item">
+                <h4>¿Qué es ruta Araucana?</h4>
+                <p>Ruta Araucana es una plataforma en línea diseñada para ser una herramienta que ayude en la planificación de viajes, información y en dirigir tus aventuras asi   aprovechando al maximo tus viajes en la Región de la Araucanía.</p>
+                
+            </div>
+            
+        </div>
+
+    <!-- Navegación -->
+    <nav>
+        <ul>
+            <li><a href="javascript:void(0);" onclick="mostrarSeccion('inicio')">Inicio</a></li>
+            <li><a href="javascript:void(0);" onclick="mostrarSeccion('lugares')">Lugares Turísticos</a></li>
+            <li><a href="javascript:void(0);" onclick="mostrarSeccion('actividades')">Actividades</a></li>
+            <li><a href="javascript:void(0);" onclick="mostrarSeccion('aventura')">Elige tu Aventura</a></li>
+            <li><a href="javascript:void(0);" onclick="mostrarSeccion('reseñas')">Reseñas</a></li>
+            <li><a href="javascript:void(0);" onclick="mostrarSeccion('contacto')">Contacto</a></li>
+        </ul>
+    </nav>
+
+    <!-- Sección de Inicio -->
+    <section id="inicio" class="section" style="display: block;">
+            <h2></h2>
+    <img src="https://franciscobt.com/cdn/shop/products/DSC0109-Panocopy2500_2048x2048.jpg?v=1644871181" 
+         alt="Paisaje de AllTrails" />
+    <p class="caption">">
+            <div class="news-item">
+                <h4>Noticias Araucanía</h4>
+                <p>Noticias Araucanía es un medio de comunicación digital enfocado en informar sobre los acontecimientos más relevantes de la región de la Araucanía, Chile. Cubre temas de actualidad, política, cultura, economía y sociedad, brindando una visión integral sobre la realidad local con un enfoque regional y comunitario.</p>
+                <a href="https://araucaniadiario.cl/">Visita Araucanía Diario</a>
+            </div>
+            <div class="news-item">
+                <h4>Sertanur</h4>
+                <p> Institución pública de Chile encargada de promover y desarrollar el turismo en el país. Su misión es posicionar a Chile como un destino atractivo tanto a nivel nacional como internacional, fomentando el turismo sustentable y contribuyendo al desarrollo económico y social de las regiones.</p>
+                <a href="https://www.sernatur.cl/">Visita Sernatur</a>
+            </div>
+            <div class="news-item">
+                <h4>Clima Actual en la Araucanía</h4>
+                <p>Consulta el pronóstico del clima para los próximos días en tus destinos favoritos.</p>
+                <a href="https://www.meteored.cl/tiempo-en-America+Sur-Chile-Araucania-1-6-196-5505.html">Clima Araucania</a>
+            </div>
+            <div class="news-item">
+                <h4>Información de la página</h4>
+                <p>Esta página se encuentra en una versión de prueba (alpha)</p>
+            </div>    
+            <div class="news-item">
+                <h4>Objetivo</h4>
+                <p>Nuestro objetivo es informar e interactuar con usted a través de rutas sugeridas, itinerarios personalizados, recomendaciones de alojamientos, actividades y eventos que puedes encontrar en nuestra página.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Actividades -->
+    <section id="actividades" class="section">
+        <h2>Actividades en la Araucanía</h2>
+        <div class="card">
+            <h4>Senderismo en el Parque Nacional Huerquehue</h4>
+            <p>Una ruta ideal para los amantes del senderismo y las vistas panorámicas.</p>
+        </div>
+        <div class="card">
+            <h4>Rafting en el Río Trancura</h4>
+            <p>Disfruta de la adrenalina en las aguas del Río Trancura con guías expertos.</p>
+        </div>
+   </section>
+
+    <!-- Sección Lugares Turísticos -->
+    <section id="lugares" class="section">
+        <h2>Lugares Turísticos</h2>
+        
+        <ul>
+            <li><strong>Volcán Villarrica</strong> - Volcan villarrica 
+Su nombre originario es Rucapillan “casa del diablo” en mapudungun. Con su forma cónica casi perfecta es la principal carta de presentación del destino, aun cuando es el más activo de Chile y uno entre los más activos de Sudamérica.
+Tiene una altura de 2.847 m.s.n.m. y está situado dentro del Parque Nacional Villarrica. En la cima presenta un cráter de aproximados 200 metros de diámetro y 50 a 100 metros de profundidad en cuyo fondo se encuentra un lago de lava permanente, además de contar con una intensa actividad fumarólica visible desde cualquier punto de la zona y durante la noche suele observarse el fascinante reflejo de la lava incandescente sobre su cráter. Por la zona sur está cubierto por un extenso glaciar de aproximados 40 km.2
+Su historial de erupciones es muy rico, registrándose las primeras por los colonizadores españoles en el siglo XVI. Las más recientes ocurrieron en: 1948-49, 1963, 1971, 1984-85 y la última en marzo 2015.
+La actividad turística en torno a este macizo se vuelca en verano a ascensiones al cráter, visita a sus cuevas volcánicas y cabalgatas por los faldeos donde cada año más de 15.000 visitantes de todo el mundo llegan a su cima y alrededores para admirar un espectáculo natural inolvidable. En invierno la práctica de ski y snowboard se transforman en el deleite de los deportes de nieve. Cuenta con un equipado centro de ski y 7 andariveles operativos. Este se abre solo en temporada de invierno.
+</li>
+<h3></h3>
+    <img src="https://lafontana.cl/wp-content/uploads/2023/09/Volcan-Villarrica-Alerta-Naranja-768x405.png" 
+         alt="Volcán Villarrica en alerta naranja" />
+    <p class="caption">Vista del Volcán Villarrica en alerta naranja, septiembre 2023.</p>
+<h4></h4>
+    <img src="https://drive.google.com/uc?id=1UAfbJyKPXxszUkGoDMXCw3aTLgEa30u4" 
+         alt="Imagen de ejemplo desde Google Drive" />
+    <p class="caption">Esta es una imagen obtenida desde Google Drive.</p>
+
+            <li><strong>Parque Nacional Huerquehue</strong> - La Reserva Nacional Malalcahuello, ubicada en la región de la Araucanía, es un destino ideal para quienes buscan disfrutar de la naturaleza en su estado más puro. Con una diversidad de paisajes que incluyen bosques nativos, montañas y termas naturales, es un lugar perfecto para realizar senderismo, avistamiento de fauna, y fotografía. Además, sus aguas termales ofrecen una experiencia de relajación en medio de un entorno natural único, convirtiéndola en un destino perfecto para los amantes de la naturaleza y la aventura.</li>
+<h5></h5>
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSbBdKW1-1x3Idxk6vlk_Y3EuKQ0SKkC3gKUw&s" 
+         alt="Volcán Villarrica en alerta naranja" />
+    <p class="caption">Vista del Volcán Villarrica en alerta naranja, septiembre 2023.</p>
+
+
+            <li><strong>Lagos de la Zona</strong> - Los lagos Caburgua, Calafquén y Villarrica, ubicados en la región de la Araucanía, son tres destinos naturales ideales para disfrutar de diversas actividades al aire libre. Aquí tienes algunas recomendaciones y actividades para cada uno:
+
+    Lago Caburgua:
+        Kayak y paseos en bote: Sus aguas tranquilas son perfectas para navegar y explorar el entorno.
+        Senderismo: Alrededor del lago, se pueden recorrer senderos rodeados de bosques nativos.
+        Pesca: Es un lugar popular para la pesca de truchas.
+        Cascadas de Caburgua: No te pierdas la oportunidad de visitar las impresionantes cascadas cercanas.
+<h6></h6>
+    <img src="https://assets.radioagricultura.cl/2021/12/lago-caburgua-kafurwe-creditos-andres-bravo-fundacion-caburga-sustentable-2.jpg" 
+         alt="Volcán Villarrica en alerta naranja" />
+    <p class="caption">Vista del Volcán Villarrica en alerta naranja, septiembre 2023.</p>
+
+    Lago Calafquén:
+        Deportes acuáticos: Ideal para actividades como navegación, pesca, y deportes como wakeboard.
+        Playas: Las playas del lago son perfectas para relajarse, nadar o hacer picnic.
+        Senderismo: Las rutas de senderismo cercanas ofrecen vistas panorámicas del lago y sus alrededores.
+        Visita a las Termas: Las termas cercanas proporcionan una experiencia de relajación en medio de un entorno natural.
+<h7></h7>
+    <img src="https://www.visitarchile.com/wp-content/uploads/2024/03/Lago-Calafquen.jpg" 
+         alt="Volcán Villarrica en alerta naranja" />
+    <p class="caption">Vista del Volcán Villarrica en alerta naranja, septiembre 2023.</p>
+
+    Lago Villarrica:
+        Pesca deportiva: El lago es excelente para pescar truchas y salmónidos.
+        Deportes acuáticos: Ideal para practicar kayak, windsurf y navegación.
+        Playa y camping: Las zonas cercanas al lago son perfectas para hacer picnic o acampar.
+        Senderismo y observación de fauna: Disfruta de caminatas por los alrededores y la observación de la fauna local.
+        Visita al Volcán Villarrica: Desde el lago, se pueden realizar excursiones para explorar el volcán, una de las principales atracciones de la zona.</li>
+<h8></h8>
+    <img src="https://cityplanchile.cl/wp-content/uploads/2020/05/Pucon.jpeg" 
+         alt="Volcán Villarrica en alerta naranja" />
+    <p class="caption">Vista del Volcán Villarrica en alerta naranja, septiembre 2023.</p>
+
+            <li><strong>Centro Cultural de Victoria</strong> - El Centro Cultural, que ofrece actividades relacionadas con la cultura local, como exposiciones, eventos artísticos, y presentaciones musicales. Es un lugar donde puedes aprender más sobre la historia y tradiciones de la región.</li>
+<h9></h9>
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRHnm_UC_K8velyUaWZLxe2A0Z97-7TUolRJQ&s" 
+         alt="Volcán Villarrica en alerta naranja" />
+    <p class="caption">Vista del Volcán Villarrica en alerta naranja, septiembre 2023.</p>
+
+
+            <li><strong>Cerro Ñielol</strong> -El Cerro Ñielol, ubicado cerca de la ciudad de Victoria, es un excelente mirador natural que ofrece vistas panorámicas de la ciudad y sus alrededores. Es un lugar ideal para realizar senderismo y caminatas a través de senderos rodeados de flora nativa, lo que lo convierte en un refugio natural para quienes buscan disfrutar de la tranquilidad del bosque. Además, su paisaje ofrece magníficas oportunidades para la fotografía, capturando tanto la belleza del entorno natural como las vistas impresionantes de la ciudad y las montañas cercanas. Es un destino perfecto para los amantes de la naturaleza y la aventura. </li>
+        </ul>
+<h10></h10>
+    <img src="https://www.temucoontour.com/wp-content/uploads/2019/08/MIRADOR-1024x575.jpg" 
+         alt="Volcán Villarrica en alerta naranja" />
+    <p class="caption">Vista del Volcán Villarrica en alerta naranja, septiembre 2023.</p>
+    </section>
+
+    <!-- Sección Elige tu Aventura -->
+    <section id="aventura" class="section">
+        <h2>Elige tu Aventura</h2>
+        <p>Selecciona un paquete de actividades, elige la fecha y confirma tu reserva.</p>
+        <form id="formAventura" class="form-aventura">
+            <label for="paquete">Selecciona tu paquete:</label>
+            <select id="paquete">
+                <option value="senderismo">Senderismo</option>
+                <option value="rafting">Rafting</option>
+                <option value="observacion_aves">Observación de Aves</option>
+            </select>
+            <label for="fecha">Fecha de la actividad:</label>
+            <input type="date" id="fecha" required>
+            <label for="correo">Correo electrónico:</label>
+            <input type="email" id="correo" required>
+            <button type="submit">Confirmar Reserva</button>
+        </form>
+        <div id="mensajeAventura" style="display: none; margin-top: 20px; color: green; text-align: center;">
+            Gracias por reservar. Nos pondremos en contacto contigo para confirmar tu actividad.
+        </div>
+    </section>
+
+    <!-- Sección Reseñas -->
+    <section id="reseñas" class="section">
+        <h2>Reseñas de Visitantes</h2>
+        <div class="reseñas-container" id="reseñasContainer"></div>
+
+        <div class="form-reseña">
+            <h3>Deja tu Reseña</h3>
+            <input type="text" id="nombreReseña" placeholder="Tu Nombre" required>
+            <textarea id="comentarioReseña" placeholder="Tu Comentario" required></textarea>
+            <button onclick="agregarReseña()">Enviar Reseña</button>
+        </div>
+    </section>
+
+    <!-- Sección Contacto -->
+    <section id="contacto" class="section">
+        <h2>Contacto</h2>
+        <p>Para más información, puedes ponerte en contacto con nosotros a través de los siguientes medios:</p>
+        <p><strong>Teléfono:</strong> +56 9 1234 5678</p>
+        <p><strong>Email:</strong> contacto@rutaaraucana.cl</p>
+
+        <form id="formContacto">
+            <input type="text" placeholder="Tu Nombre" required>
+            <input type="email" placeholder="Tu Correo" required>
+            <textarea placeholder="Tu Mensaje" required></textarea>
+            <button type="submit">Enviar</button>
+        </form>
+        <div class="mensaje-exito" id="mensajeExito">
+            Gracias por contactarnos. Nos pondremos en contacto contigo pronto.
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Ruta Araucana. Todos los derechos reservados.</p>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Función para mostrar la sección correcta cuando se hace clic en el menú
+        function mostrarSeccion(seccion) {
+            const secciones = document.querySelectorAll('.section');
+            secciones.forEach(function(s) {
+                s.style.display = 'none';
+            });
+
+            const seccionMostrar = document.getElementById(seccion);
+            if (seccionMostrar) {
+                seccionMostrar.style.display = 'block';
+            }
+        }
+
+        // Función para manejar el formulario de contacto
+        const formContacto = document.getElementById('formContacto');
+        formContacto.addEventListener('submit', function(e) {
+            e.preventDefault();
+            document.getElementById('mensajeExito').style.display = 'block';
+        });
+
+        // Función para manejar el formulario de reseñas
+        function agregarReseña() {
+            const nombre = document.getElementById('nombreReseña').value;
+            const comentario = document.getElementById('comentarioReseña').value;
+            if (nombre && comentario) {
+                const reseñasContainer = document.getElementById('reseñasContainer');
+                const nuevaReseña = document.createElement('div');
+                nuevaReseña.classList.add('reseña');
+                nuevaReseña.innerHTML = `<h3>${nombre}</h3><p>${comentario}</p>`;
+                reseñasContainer.appendChild(nuevaReseña);
+                // Limpiar el formulario
+                document.getElementById('nombreReseña').value = '';
+                document.getElementById('comentarioReseña').value = '';
+            } else {
+                alert("Por favor, completa todos los campos.");
+            }
+        }
+
+        // Función para manejar el formulario de aventuras
+        const formAventura = document.getElementById('formAventura');
+        formAventura.addEventListener('submit', function(e) {
+            e.preventDefault();
+            document.getElementById('mensajeAventura').style.display = 'block';
+        });
+    </script>
+</body>
+</html>
